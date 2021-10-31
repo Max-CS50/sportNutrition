@@ -8,7 +8,7 @@ const createCard: Product[] = [];
 class Card {
    private name: Element | null;
    private price: Element | null;
-   private image: HTMLImageElement | null;
+   private src: HTMLImageElement | null;
    private addToCardButton: HTMLButtonElement | null;
 
    constructor(product: Product) {
@@ -17,16 +17,16 @@ class Card {
       ).content;
       const content = document.importNode(template, true);
 
-      const image = content.querySelector(".item-card-img");
-      image.src = product.src;
+      this.src = content.querySelector(".item-card-img");
+      (this.src as HTMLImageElement).setAttribute('src', product.src);
       this.name = content.querySelector(".card-title");
-      this.name.innerHTML = product.name;
+      (this.name as Element).innerHTML = product.name;
       this.price = content.querySelector(".card-price");
-      this.price.innerHTML = product.price;
+      (this.price as Element).innerHTML = product.price;
       this.addToCardButton = content.querySelector(".buy");
 
-      this.addToCardButton.onclick = () => this.addToCard(product);
-
+      (this.addToCardButton as HTMLButtonElement).onclick = (): void =>
+         this.addToCard(product);
       addNote.appendChild(content);
    }
    addToCard(product) {
