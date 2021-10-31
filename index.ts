@@ -18,12 +18,13 @@ class Card {
       const content = document.importNode(template, true);
 
       this.src = content.querySelector(".item-card-img");
-      (this.src as HTMLImageElement).setAttribute('src', product.src);
       this.name = content.querySelector(".card-title");
-      (this.name as Element).innerHTML = product.name;
       this.price = content.querySelector(".card-price");
-      (this.price as Element).innerHTML = product.price;
       this.addToCardButton = content.querySelector(".buy");
+
+      (this.src as HTMLImageElement).setAttribute('src', product.src);
+      (this.name as Element).innerHTML = product.name;
+      (this.price as Element).innerHTML = product.price;
 
       (this.addToCardButton as HTMLButtonElement).onclick = (): void =>
          this.addToCard(product);
