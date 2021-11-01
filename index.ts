@@ -146,14 +146,14 @@ clickOnBasket.onclick = function openPopup() {
          `;
 
    createCard.forEach((product) => {
-      const basketName = document.createElement('div');
-      const basketPrice = document.createElement('div');
+      const basketName: HTMLDivElement = document.createElement('div');
+      const basketPrice: HTMLDivElement = document.createElement('div');
 
       basketName.className = 'Cartpopup-box-name';
       basketPrice.className = 'Cartpopup-box-price';
 
-      (basketName as HTMLDivElement).innerHTML = product.name;
-      (basketPrice as HTMLDivElement).innerHTML = product.price;
+      basketName.innerHTML = product.name;
+      basketPrice.innerHTML = product.price;
 
       document.querySelector('.placeitems').appendChild(basketName);
       document.querySelector('.placeitems').appendChild(basketPrice);
