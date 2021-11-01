@@ -9,7 +9,7 @@ class Card {
    private src: HTMLImageElement | null;
    private name: HTMLDivElement | null;
    private price: HTMLDivElement | null;
-   private addToCardButton: HTMLButtonElement | null;
+   private button: HTMLButtonElement | null;
 
    constructor(product: Product) {
       const template: DocumentFragment = (
@@ -19,13 +19,13 @@ class Card {
       this.src = content.querySelector(".item-card-img");
       this.name = content.querySelector(".card-title");
       this.price = content.querySelector(".card-price");
-      this.addToCardButton = content.querySelector(".buy");
+      this.button = content.querySelector(".buy");
 
       this.src.setAttribute('src', product.src);
       this.name.innerHTML = product.name;
       this.price.innerHTML = product.price;
 
-      this.addToCardButton.onclick = (): void => this.addToCard(product);
+      this.button.onclick = (): void => this.addToCard(product);
       addNote.appendChild(content);
    }
    addToCard(product) {
@@ -146,17 +146,17 @@ clickOnBasket.onclick = function openPopup() {
          `;
 
    createCard.forEach((product) => {
-      const busketName = document.createElement('div');
-      const busketPrice = document.createElement('div');
+      const basketName = document.createElement('div');
+      const basketPrice = document.createElement('div');
 
-      busketName.className = 'Cartpopup-box-name';
-      busketPrice.className = 'Cartpopup-box-price';
+      basketName.className = 'Cartpopup-box-name';
+      basketPrice.className = 'Cartpopup-box-price';
 
-      (busketName as HTMLDivElement).innerHTML = product.name;
-      (busketPrice as HTMLDivElement).innerHTML = product.price;
+      (basketName as HTMLDivElement).innerHTML = product.name;
+      (basketPrice as HTMLDivElement).innerHTML = product.price;
 
-      document.querySelector('.placeitems').appendChild(busketName);
-      document.querySelector('.placeitems').appendChild(busketPrice);
+      document.querySelector('.placeitems').appendChild(basketName);
+      document.querySelector('.placeitems').appendChild(basketPrice);
    });
    const clickOnClose: HTMLElement = document.getElementById('closeModal');
    clickOnClose.onclick = (): void => {
