@@ -6,8 +6,8 @@ const cartNode = document.querySelector(".placeitems");
 const createCard: Product[] = [];
 
 class Card {
-   private name: Element | null;
-   private price: Element | null;
+   private name: HTMLDivElement | null;
+   private price: HTMLDivElement | null;
    private src: HTMLImageElement | null;
    private addToCardButton: HTMLButtonElement | null;
 
