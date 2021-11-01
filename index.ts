@@ -6,28 +6,26 @@ const cartNode = document.querySelector(".placeitems");
 const createCard: Product[] = [];
 
 class Card {
+   private src: HTMLImageElement | null;
    private name: HTMLDivElement | null;
    private price: HTMLDivElement | null;
-   private src: HTMLImageElement | null;
    private addToCardButton: HTMLButtonElement | null;
 
    constructor(product: Product) {
       const template: DocumentFragment = (
-         document.getElementById('card-template') as HTMLTemplateElement
-      ).content;
-      const content = document.importNode(template, true);
+         document.getElementById('card-template') as HTMLTemplateElement).content;
+      const content: DocumentFragment = document.importNode(template, true);
 
       this.src = content.querySelector(".item-card-img");
       this.name = content.querySelector(".card-title");
       this.price = content.querySelector(".card-price");
       this.addToCardButton = content.querySelector(".buy");
 
-      (this.src as HTMLImageElement).setAttribute('src', product.src);
-      (this.name as Element).innerHTML = product.name;
-      (this.price as Element).innerHTML = product.price;
+      this.src.setAttribute('src', product.src);
+      this.name.innerHTML = product.name;
+      this.price.innerHTML = product.price;
 
-      (this.addToCardButton as HTMLButtonElement).onclick = (): void =>
-         this.addToCard(product);
+      this.addToCardButton.onclick = (): void => this.addToCard(product);
       addNote.appendChild(content);
    }
    addToCard(product) {
@@ -111,55 +109,108 @@ const Drinks = new Product(
 new Card(Drinks);
 
 const cardProducts = [];
-const clickOnBasket: HTMLElement = document.getElementById('basketButton');
-clickOnBasket.onclick = function open_popup() {
+const clickOnBasket: HTMLSpanElement = document.getElementById('basketButton');
+clickOnBasket.onclick = function openPopup() {
    const basket = document.getElementById('popupModal');
    let popup = document.createElement('section');
    popup.className = 'popup';
    basket.appendChild(popup);
-   (popup as Element).innerHTML = `
+   (popup as HTMLDivElement).innerHTML = `
          <section class="Cartpopup" id="Cartpopup">
          <div class="Cartpopup-inner">
             <div class="Cartpopup-basket">Your order</div>
+
             <div class="Cartpopup-items">
                <div class="Cartpopup-item">Name</div>
                <div class="Cartpopup-item">Price</div>
             </div>
+
             <div class="Cartpopup-box">
                <div class="Cartpopup-box-item" id="Cartpopup-item">
-                     <div class="placeitems">
-                     </div>
+                     <div class="placeitems"></div>
                </div>
             </div>
+
             <div class="list-item-button">
                <button type="button" class="button-b">BUY</button>
             </div>
+
             <div class="Cartpopup-btn" id="closeModal">
-               <div class="Cartpopup-btn-close" onclick="removeModal();">
+               <div class="Cartpopup-btn-close">
                   <span class="popup-close">X</span>
                </div>
             </div>
+
          </div>
          </section>
          `;
 
    createCard.forEach((product) => {
-      const busketName = document.createElement("div");
-      const busketPrice = document.createElement("div");
+      const busketName = document.createElement('div');
+      const busketPrice = document.createElement('div');
 
-      busketName.className = "Cartpopup-box-name";
-      busketPrice.className = "Cartpopup-box-price";
+      busketName.className = 'Cartpopup-box-name';
+      busketPrice.className = 'Cartpopup-box-price';
 
-      (busketName as Element).innerHTML = product.name;
-      (busketPrice as Element).innerHTML = product.price;
+      (busketName as HTMLDivElement).innerHTML = product.name;
+      (busketPrice as HTMLDivElement).innerHTML = product.price;
 
-      document.querySelector(".placeitems").appendChild(busketName);
-      document.querySelector(".placeitems").appendChild(busketPrice);
+      document.querySelector('.placeitems').appendChild(busketName);
+      document.querySelector('.placeitems').appendChild(busketPrice);
    });
    const clickOnClose: HTMLElement = document.getElementById('closeModal');
    clickOnClose.onclick = (): void => {
       document.querySelector('.popup').remove();
    };
 };
+// clickOnBasket.onclick = function open_popup() {
+//    const basket = document.getElementById('popupModal');
+//    let popup = document.createElement('section');
+//    popup.className = 'popup';
+//    basket.appendChild(popup);
+//    (popup as Element).innerHTML = `
+//          <section class="Cartpopup" id="Cartpopup">
+//          <div class="Cartpopup-inner">
+//             <div class="Cartpopup-basket">Your order</div>
+//             <div class="Cartpopup-items">
+//                <div class="Cartpopup-item">Name</div>
+//                <div class="Cartpopup-item">Price</div>
+//             </div>
+//             <div class="Cartpopup-box">
+//                <div class="Cartpopup-box-item" id="Cartpopup-item">
+//                      <div class="placeitems">
+//                      </div>
+//                </div>
+//             </div>
+//             <div class="list-item-button">
+//                <button type="button" class="button-b">BUY</button>
+//             </div>
+//             <div class="Cartpopup-btn" id="closeModal">
+//                <div class="Cartpopup-btn-close" onclick="removeModal();">
+//                   <span class="popup-close">X</span>
+//                </div>
+//             </div>
+//          </div>
+//          </section>
+//          `;
+
+//    createCard.forEach((product) => {
+//       const busketName = document.createElement("div");
+//       const busketPrice = document.createElement("div");
+
+//       busketName.className = "Cartpopup-box-name";
+//       busketPrice.className = "Cartpopup-box-price";
+
+//       (busketName as Element).innerHTML = product.name;
+//       (busketPrice as Element).innerHTML = product.price;
+
+//       document.querySelector(".placeitems").appendChild(busketName);
+//       document.querySelector(".placeitems").appendChild(busketPrice);
+//    });
+//    const clickOnClose: HTMLElement = document.getElementById('closeModal');
+//    clickOnClose.onclick = (): void => {
+//       document.querySelector('.popup').remove();
+//    };
+// };
 
 
