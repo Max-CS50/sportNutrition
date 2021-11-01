@@ -11,7 +11,7 @@ class Card {
    private price: HTMLDivElement | null;
    private button: HTMLButtonElement | null;
 
-   constructor(product: Product) {
+   constructor(product: Product | null) {
       const template: DocumentFragment = (
          document.getElementById('card-template') as HTMLTemplateElement).content;
       const content: DocumentFragment = document.importNode(template, true);
@@ -28,17 +28,17 @@ class Card {
       this.button.onclick = (): void => this.addToCard(product);
       addNote.appendChild(content);
    }
-   addToCard(product) {
+   addToCard(product: Product) {
       createCard.push(product);
    }
 }
 
 class Product {
-   src: string;
-   name: string;
-   price: string;
+   src: string | null;
+   name: string | null;
+   price: string | null;
 
-   constructor(src: string, name: string, price: string) {
+   constructor(src: string | null, name: string | null, price: string | null) {
       this.src = src;
       this.name = name;
       this.price = price;
@@ -112,7 +112,7 @@ const cardProducts = [];
 const clickOnBasket: HTMLSpanElement = document.getElementById('basketButton');
 clickOnBasket.onclick = function openPopup() {
    const basket = document.getElementById('popupModal');
-   let popup = document.createElement('section');
+   const popup = document.createElement('section');
    popup.className = 'popup';
    basket.appendChild(popup);
    (popup as HTMLDivElement).innerHTML = `
