@@ -158,7 +158,7 @@ clickOnBasket.onclick = function openPopup() {
       document.querySelector('.placeitems').appendChild(basketName);
       document.querySelector('.placeitems').appendChild(basketPrice);
    });
-   const clickOnClose: HTMLElement = document.getElementById('closeModal');
+   const clickOnClose: HTMLSpanElement = document.getElementById('closeModal');
    clickOnClose.onclick = (): void => {
       document.querySelector('.popup').remove();
    };
